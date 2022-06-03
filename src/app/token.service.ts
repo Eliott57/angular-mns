@@ -10,4 +10,8 @@ export class TokenService {
   getToken(){
     return localStorage.getItem('_token') || null;
   }
+
+  setToken(_token: string){
+    localStorage.setItem('_token', _token);
+  }
 }
