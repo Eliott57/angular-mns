@@ -1,0 +1,52 @@
+<div class="shadow-lg bg-white p-3 position-relative w-100 mb-3">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <div class="d-flex align-items-center">
+      <h3 *ngIf="!onEdit" class="m-0 p-0">
+        {{ article.titre }}
+      </h3>
+      <div *ngIf="onEdit">
+        <input class="form-control" type="text" [(ngModel)]="articleTitle">
+      </div>
+      <span class="text-muted fw-light ms-1">- {{ author?.pseudo }}</span>
+    </div>
+    <div *ngIf="userArticle && !onEdit" class="">
+      <button class="btn btn-sm btn-primary me-1" (click)="toggleEdit()">
+        <i class="fa fa-edit"></i>
+      </button>
+      <button class="btn btn-sm btn-danger" (click)="deleteArticle()">
+        <i class="fa fa-trash"></i>
+      </button>
+    </div>
+  </div>
+  <p *ngIf="!onEdit" class="fw-light">
+    {{ article.contenu | truncate:500 }}
+  </p>
+  <textarea *ngIf="onEdit" class="form-control shadow-none my-3" placeholder="Votre contenu" [(ngModel)]="articleContent" id="contentInput" style="height: 25vh; resize: none;"></textarea>
+  <div class="w-100 d-flex justify-content-end">
+    <button *ngIf="onEdit" class="btn btn-light me-1" (click)="toggleEdit()">Annuler</button>
+    <button *ngIf="onEdit" class="btn btn-success" (click)="editArticle()">Valider</button>
+  </div>
+  <hr/>
+  <div class="accordion accordion-flush" [id]="'article-'+article.id_article">
+    <div class="accordion-item">
+      <h2 class="accordion-header" [id]="'heading-'+article.id_article">
+        <button class="accordion-button collapsed shadow-none" type="button" data-bs-toggle="collapse"
+                [attr.data-bs-target]="'#flush-'+article.id_article" aria-expanded="false" [attr.aria-controls]="'flush-'+article.id_article">
+          Commentaires ({{ comments.length }})
+        </button>
+      </h2>
+      <div [id]="'flush-'+article.id_article" class="accordion-collapse collapse" [attr.aria-labelledby]="'heading-'+article.id_article" [attr.data-bs-parent]="'#article-'+article.id_article">
+        <div class="accordion-body">
+          <app-comment
+            *ngFor="let comment of comments"
+            [comment]="comment">
+          </app-comment>
+          <div class="d-flex justify-content-center align-items-center">
+            <input type="text" class="form-control me-3 shadow-none" [(ngModel)]="newComment" id="addCommentInput" placeholder="Ajouter un commentaire">
+            <button class="btn btn-primary" (click)="addComment()">Ajouter</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

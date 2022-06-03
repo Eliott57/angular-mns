@@ -1,0 +1,23 @@
+<div class="bg-light p-3 mb-3 shadow-sm">
+  <div class="d-flex justify-content-between align-items-center">
+    <p *ngIf="!onEdit" class="m-0 p-0">
+      {{ comment.contenu | truncate:250 }}
+    </p>
+    <div *ngIf="onEdit" class="w-100">
+      <input class="form-control w-100" type="text" [(ngModel)]="commentContent">
+      <div class="w-100 d-flex justify-content-end my-3">
+        <button *ngIf="onEdit" class="btn btn-light me-1" (click)="toggleEdit()">Annuler</button>
+        <button *ngIf="onEdit" class="btn btn-success" (click)="editComment()">Valider</button>
+      </div>
+    </div>
+    <div *ngIf="userComment && !onEdit" class="">
+      <button class="btn btn-sm btn-primary me-1" (click)="toggleEdit()">
+        <i class="fa fa-edit"></i>
+      </button>
+      <button class="btn btn-sm btn-danger" (click)="deleteComment()">
+        <i class="fa fa-trash"></i>
+      </button>
+    </div>
+  </div>
+  <span class="text-muted fw-light text-end">- {{ author?.pseudo }}</span>
+</div>

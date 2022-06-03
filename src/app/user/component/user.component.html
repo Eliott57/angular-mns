@@ -1,0 +1,42 @@
+<div class="d-flex flex-column justify-content-center align-items-center w-100 p-3">
+  <div class="shadow-lg p-3 bg-white mb-3 d-flex justify-content-center align-items-center w-100">
+    <img src="{{ user?.avatar }}" class="me-3" style="width: 50px;"/>
+    <div class="d-flex flex-column">
+      <div class="d-flex">
+        <h3 class="m-0" *ngIf="!onEdit">{{ user?.pseudo }}</h3>
+        <div *ngIf="onEdit" class="mb-3">
+          <input class="form-control mb-3" type="text" [(ngModel)]="userAvatar" placeholder="Url de votre avatar">
+          <input class="form-control mb-3" type="text" [(ngModel)]="userPseudo">
+          <input class="form-control" type="email" [(ngModel)]="userEmail">
+        </div>
+        <button *ngIf="userAccount && !onEdit" class="btn shadow-none border-none m-0 p-0 ms-1 text-primary" (click)="toggleEdit()">
+          <i class="fa fa-edit"></i>
+        </button>
+      </div>
+      <p *ngIf="!onEdit" class="m-0 fw-light">{{ user?.email }}</p>
+      <div>
+        <button *ngIf="onEdit" class="btn btn-light me-1" (click)="toggleEdit()">Annuler</button>
+        <button *ngIf="onEdit" class="btn btn-success" (click)="editAccount()">Valider</button>
+      </div>
+      <button *ngIf="userAccount && !onEdit" class="nav-link btn shadow-none border-none m-0 p-0 text-danger" (click)="deleteAccount()">Supprimer mon compte</button>
+    </div>
+   </div>
+  <div class="d-flex w-100">
+    <div class="shadow-sm bg-white p-3 mb-3 me-3 d-flex flex-column justify-content-start align-items-center w-50">
+      <h5 class="mb-3">5 derniers articles</h5>
+      <app-article
+        class="w-100"
+        *ngFor="let article of lastArticles"
+        [article]="article">
+      </app-article>
+    </div>
+    <div class="shadow-sm p-3 bg-white mb-3 d-flex flex-column justify-content-start align-items-center w-50">
+      <h5 class="mb-3">5 derniers commentaires</h5>
+      <app-comment
+        class="w-100"
+        *ngFor="let comment of lastComments"
+        [comment]="comment">
+      </app-comment>
+    </div>
+  </div>
+</div>

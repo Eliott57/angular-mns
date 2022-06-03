@@ -1,0 +1,19 @@
+<div class="d-flex justify-content-center align-items-center" style="min-height: 81.5vh">
+  <div class="shadow-lg p-3" style="width: 25vw;">
+    <h3 class="text-center mb-3">Connexion</h3>
+    <div class="form-floating mb-3 fw-light">
+      <input type="email" class="form-control shadow-none" [(ngModel)]="email" id="emailInput" placeholder="Adresse e-mail">
+      <label for="emailInput">Adresse e-mail</label>
+    </div>
+    <div class="form-floating mb-3 fw-light">
+      <input type="password" class="form-control shadow-none"[(ngModel)]="password" id="passwordInput" placeholder="Mot de passe">
+      <label for="passwordInput">Mot de passe</label>
+    </div>
+    <button [ngClass]="{'btn':true,
+                        'btn-primary': true,
+                         'w-100': true,
+                          'btn-lg': true,
+                          'disabled': email.trim() === '' || password.trim() === ''
+                          }" (click)="login()">Connexion</button>
+  </div>
+</div>

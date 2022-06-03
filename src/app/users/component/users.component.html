@@ -1,0 +1,17 @@
+<div class="d-flex justify-content-center align-items-center" style="min-height: 81.5vh">
+  <div class="d-flex flex-column w-100" style="max-height:81.5vh; overflow: auto;">
+    <a routerLink="/user/{{user.id}}" *ngFor="let user of users; let i = index;"
+       [ngClass]="{'bg-light':(i%2===0),
+                    'p-3':true,
+                    'text-dark': true,
+                    'text-decoration-none': true,
+                    'd-flex': true
+                    }">
+      <img [src]="user.avatar" class="me-3" style="width: 50px;"/>
+      <div class="d-flex flex-column">
+        <h5 class="m-0">{{ user.pseudo }}</h5>
+        <p class="m-0 fw-light">{{ user.email }}</p>
+      </div>
+    </a>
+  </div>
+</div>

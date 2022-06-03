@@ -1,0 +1,25 @@
+<div class="d-flex flex-column justify-content-center align-items-center w-100 p-3 mb-3">
+  <div class="shadow-lg bg-white p-3 mb-3 d-flex flex-column justify-content-center align-items-center w-100">
+    <div class="form-floating mb-3 fw-light w-100">
+      <input type="text" class="form-control shadow-none" [(ngModel)]="title" id="titleInput" placeholder="Titre">
+      <label for="titleInput">Titre</label>
+    </div>
+    <div class="form-floating mb-3 fw-light w-100">
+      <textarea class="form-control shadow-none" placeholder="Votre contenu" [(ngModel)]="content" id="contentInput" style="height: 50vh; resize: none;"></textarea>
+      <label for="contentInput">Votre contenu</label>
+    </div>
+    <button [ngClass]="{'btn':true,
+                          'btn-primary': true,
+                           'w-100': true,
+                           'btn-lg': true,
+                           'disabled': title.trim() === '' || content.trim() === ''
+                           }" class="btn btn-primary w-100 btn-lg" (click)="addArticle()">Ajouter l'article</button>
+  </div>
+  <div class="d-flex flex-column justify-content-center align-items-center w-100 bg-white">
+    <app-article
+      class="w-100"
+      *ngFor="let article of articles"
+      [article]="article">
+    </app-article>
+  </div>
+</div>

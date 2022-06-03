@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-center align-items-center" style="min-height: 81.5vh">
+  <div class="shadow-lg p-3" style="width: 25vw;">
+    <h3 class="text-center mb-3">Inscription</h3>
+    <div class="form-floating mb-3 fw-light">
+      <input type="email" class="form-control shadow-none" [(ngModel)]="email" id="emailInput" placeholder="Adresse e-mail">
+      <label for="emailInput">Adresse e-mail</label>
+    </div>
+    <div class="form-floating mb-3 fw-light">
+      <input type="text" class="form-control shadow-none" [(ngModel)]="pseudo" id="pseudoInput" placeholder="Pseudo">
+      <label for="pseudoInput">Pseudo</label>
+    </div>
+    <div class="form-floating mb-3 fw-light">
+      <input type="password" class="form-control shadow-none" [(ngModel)]="password" (ngModelChange)="enterPassword()" id="passwordInput" placeholder="Mot de passe">
+      <label for="passwordInput">Mot de passe</label>
+      <span *ngIf="errorPassword" class="text-danger">Le mot de passe doit comporter au minimum 8 caractères dont au moins une majuscule et un chiffre.</span>
+    </div>
+    <div class="form-floating mb-3 fw-light">
+      <input type="password" class="form-control shadow-none" [(ngModel)]="confirmPassword" (ngModelChange)="enterConfirmPassword()" id="confirmPasswordInput" placeholder="Confirmer le mot de passe">
+      <label for="confirmPasswordInput">Confirmer le mot de passe</label>
+      <span *ngIf="errorConfirmPassword" class="text-danger">Les mots de passes ne correspondent pas.</span>
+    </div>
+    <button [ngClass]="{'btn':true,
+                        'btn-primary': true,
+                         'w-100': true,
+                          'btn-lg': true,
+                          'disabled': errorPassword || errorConfirmPassword || password.trim() === '' || confirmPassword.trim() === '' || pseudo.trim() === '' || email.trim() === ''
+                          }"
+            class="btn btn-primary w-100 btn-lg disabled" (click)="register()">Inscription</button>
+  </div>
+</div>
